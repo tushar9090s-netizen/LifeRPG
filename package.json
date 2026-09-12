@@ -9,5 +9,8 @@
     "dev": "npm --workspace frontend run dev",
     "build": "npm --workspace frontend run build",
     "preview": "npm --workspace frontend run preview"
+  },
+  "dependencies": {
+    "firebase": "^12.19.0"
   }
 }
