@@ -1,0 +1,166 @@
+:root {
+  /* ================================================
+     ARISE — SHADOW WORLD (Default)
+     Cinematic dark fantasy RPG palette
+     ================================================ */
+
+  /* Core backgrounds */
+  --bg:              #0a0b12;
+  --bg-wash:         #11121e;
+  --surface:         #171826;
+  --surface-mid:     #1a1b2e;
+  --surface-raised:  #1e1f32;
+  --surface-subtle:  #121320;
+  --surface-glass:   rgba(23, 24, 38, 0.82);
+  --panel-glass:     rgba(15, 16, 26, 0.88);
+
+  /* Borders */
+  --border:          #3a3a5c;
+  --border-subtle:   rgba(58, 58, 92, 0.35);
+  --border-glow:     rgba(139, 108, 240, 0.4);
+  --border-bright:   rgba(139, 108, 240, 0.65);
+
+  /* Typography */
+  --text:            #eae8f5;
+  --text-bright:     #f8f6ff;
+  --text-dim:        #9b98b8;
+  --text-muted:      #6b688d;
+
+  /* PRIMARY — Arcane Violet */
+  --accent:          #8b6cf0;
+  --accent-deep:     #5b4bb8;
+  --accent-light:    #a987f5;
+  --accent-glow:     rgba(139, 108, 240, 0.3);
+  --accent-glow-md:  rgba(139, 108, 240, 0.45);
+  --accent-glow-lg:  rgba(139, 108, 240, 0.6);
+
+  /* SECONDARY — Gold (currency, legendary, achievements ONLY) */
+  --gold:            #e0b64a;
+  --gold-light:      #f0cc6a;
+  --gold-dim:        #997825;
+  --gold-glow:       rgba(224, 182, 74, 0.35);
+  --gold-glow-lg:    rgba(224, 182, 74, 0.55);
+
+  /* Creature/System — Emerald (dragon, system effects) */
+  --creature:        #35e3a0;
+  --creature-soft:   rgba(53, 227, 160, 0.18);
+  --creature-mid:    rgba(53, 227, 160, 0.35);
+  --creature-strong: rgba(53, 227, 160, 0.55);
+
+  /* Danger */
+  --danger:          #e0546b;
+  --danger-glow:     rgba(224, 84, 107, 0.35);
+
+  /* Scrim */
+  --scrim:           rgba(5, 6, 12, 0.92);
+  --scrim-light:     rgba(5, 6, 12, 0.7);
+
+  /* Attribute colours */
+  --str:     #c86446;   --str-bg:  rgba(200,100,70,0.13);
+  --int:     #3b82f6;   --int-bg:  rgba(59,130,246,0.13);
+  --agi:     #22c55e;   --agi-bg:  rgba(34,197,94,0.12);
+  --vit:     #f43f5e;   --vit-bg:  rgba(244,63,94,0.12);
+
+  /* Rarity colours */
+  --common:    #8b9bb4;
+  --uncommon:  #22c55e;
+  --rare:      #3b82f6;
+  --epic:      #8b6cf0;
+  --legendary: #e0b64a;
+  --mythic:    #fb7185;
+
+  /* Typography */
+  --font-display: 'Cinzel', 'Palatino Linotype', serif;
+  --font-body:    'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:    'Courier New', Courier, monospace;
+
+  /* Radii — mostly sharp with small rounding */
+  --r-xs:   2px;
+  --r-sm:   4px;
+  --r-md:   6px;
+  --r-lg:   10px;
+  --r-xl:   14px;
+  --r-full: 9999px;
+
+  /* Backward Compatibility Aliases */
+  --bg-color: var(--bg);
+  --bg-gradient-wash: var(--bg-wash);
+  --surface-color: var(--surface);
+  --surface-color-subtle: var(--surface-subtle);
+  --surface-color-elevated: var(--surface-raised);
+  --border-color: var(--border);
+  --border-color-subtle: var(--border-subtle);
+  --border-color-glow: var(--border-glow);
+  --text-color: var(--text);
+  --dim-text-color: var(--text-dim);
+  --muted-text-color: var(--text-muted);
+  --accent-color: var(--accent);
+  --gold-color: var(--gold);
+  --creature-glow: var(--creature);
+  --danger-color: var(--danger);
+  --scrim-bg: var(--scrim);
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --radius-full: var(--r-full);
+  --font-sans: var(--font-body);
+
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast:   150ms;
+  --t-base:   240ms;
+  --t-slow:   400ms;
+}
+
+/* ================================================
+   DIVINE WORLD — Celestial ivory & antique gold
+   ================================================ */
+[data-theme="divine"] {
+  --bg:              #f3efe4;
+  --bg-wash:         #ece5d3;
+  --surface:         #fbf8ef;
+  --surface-mid:     #f5f0e3;
+  --surface-raised:  #ffffff;
+  --surface-subtle:  #f4ede0;
+  --surface-glass:   rgba(251, 248, 239, 0.85);
+  --panel-glass:     rgba(243, 239, 228, 0.92);
+
+  --border:          #d8caa0;
+  --border-subtle:   rgba(216, 202, 160, 0.4);
+  --border-glow:     rgba(182, 137, 46, 0.4);
+  --border-bright:   rgba(182, 137, 46, 0.7);
+
+  --text:            #2b2718;
+  --text-bright:     #16130a;
+  --text-dim:        #766c4d;
+  --text-muted:      #a89870;
+
+  --accent:          #b6892e;
+  --accent-deep:     #8a6a22;
+  --accent-light:    #d4a84e;
+  --accent-glow:     rgba(182, 137, 46, 0.28);
+  --accent-glow-md:  rgba(182, 137, 46, 0.44);
+  --accent-glow-lg:  rgba(182, 137, 46, 0.6);
+
+  --gold:            #a97d1f;
+  --gold-light:      #c9a040;
+  --gold-dim:        #7a580d;
+  --gold-glow:       rgba(169, 125, 31, 0.32);
+  --gold-glow-lg:    rgba(169, 125, 31, 0.5);
+
+  --creature:        #6fd6f0;
+  --creature-soft:   rgba(111, 214, 240, 0.18);
+  --creature-mid:    rgba(111, 214, 240, 0.35);
+  --creature-strong: rgba(111, 214, 240, 0.55);
+
+  --danger:          #b8425a;
+  --danger-glow:     rgba(184, 66, 90, 0.35);
+
+  --scrim:           rgba(240, 235, 224, 0.93);
+  --scrim-light:     rgba(240, 235, 224, 0.72);
+
+  --str:     #b85a32;   --str-bg:  rgba(184,90,50,0.1);
+  --int:     #2563eb;   --int-bg:  rgba(37,99,235,0.1);
+  --agi:     #16a34a;   --agi-bg:  rgba(22,163,74,0.1);
+  --vit:     #e11d48;   --vit-bg:  rgba(225,29,72,0.1);
+}

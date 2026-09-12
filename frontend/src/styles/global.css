@@ -1,0 +1,325 @@
+@import './variables.css';
+
+/* ================================================
+   ARISE — Global Design System
+   Solo Leveling × Dark Fantasy RPG
+   ================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  transition: background var(--t-slow) ease, color var(--t-slow) ease;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Typography ───────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+.font-body    { font-family: var(--font-body); }
+.font-mono    { font-family: var(--font-mono); }
+
+/* ── RPG Cards ────────────────────────────────── */
+/* Base RPG panel: thin hairline border, inner top-glow, restrained shadow */
+.rpg-panel {
+  background: var(--panel-glass);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 0 0 1px var(--border-subtle),
+    inset 0 1px 0 rgba(139, 108, 240, 0.06),
+    0 12px 40px rgba(0, 0, 0, 0.55);
+  transition: border-color var(--t-base) ease, box-shadow var(--t-base) ease;
+}
+
+/* Thin top-edge illumination — characteristic RPG panel detail */
+.rpg-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--accent) 25%,
+    var(--creature) 55%,
+    var(--accent) 75%,
+    transparent 100%);
+  opacity: 0.45;
+  z-index: 1;
+}
+
+.rpg-panel:hover {
+  border-color: var(--border-glow);
+  box-shadow:
+    0 0 0 1px var(--border-subtle),
+    inset 0 1px 0 rgba(139, 108, 240, 0.1),
+    0 12px 48px rgba(0, 0, 0, 0.65),
+    0 0 18px var(--accent-glow);
+}
+
+[data-theme="divine"] .rpg-panel {
+  box-shadow:
+    0 0 0 1px var(--border-subtle),
+    0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="divine"] .rpg-panel::before {
+  background: linear-gradient(90deg,
+    transparent 0%, var(--accent) 35%, transparent 100%);
+  opacity: 0.35;
+}
+
+/* card-base alias used throughout components */
+.card-base { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); }
+
+/* ── Section Labels ───────────────────────────── */
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.section-super-tag {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  margin-bottom: 3px;
+  display: block;
+}
+
+/* ── Buttons ──────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 8px 18px;
+  border-radius: var(--r-sm);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition: all var(--t-base) var(--ease-out-expo);
+  user-select: none;
+  box-shadow: 0 2px 12px var(--accent-glow);
+}
+.btn-primary:hover {
+  background: var(--accent-light);
+  border-color: var(--accent-light);
+  box-shadow: 0 0 20px var(--accent-glow-md);
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: translateY(1px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 8px 16px;
+  border-radius: var(--r-sm);
+  background: var(--surface-glass);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all var(--t-base) var(--ease-out-expo);
+  user-select: none;
+  backdrop-filter: blur(8px);
+}
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 0 12px var(--accent-glow);
+  transform: translateY(-1px);
+}
+.btn-secondary:active { transform: translateY(1px); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--r-sm);
+  transition: color var(--t-fast) ease;
+}
+.btn-ghost:hover { color: var(--accent); }
+
+/* ── Form Inputs ──────────────────────────────── */
+.system-input, .system-select {
+  width: 100%;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 9px 12px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color var(--t-base) ease, box-shadow var(--t-base) ease;
+}
+.system-input:focus, .system-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.system-input::placeholder { color: var(--text-muted); }
+.system-select option { background: var(--surface); color: var(--text); }
+
+/* ── Modals ───────────────────────────────────── */
+.scrim-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--scrim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 1.5rem;
+}
+
+.modal-enter {
+  animation: modalPop var(--t-slow) var(--ease-out-expo) forwards;
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.9) translateY(16px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0); }
+}
+
+/* ── Rarity System ────────────────────────────── */
+.rarity-common    { color: var(--common);    border-color: var(--common) !important; }
+.rarity-uncommon  { color: var(--uncommon);  border-color: var(--uncommon) !important; }
+.rarity-rare      { color: var(--rare);      border-color: var(--rare) !important; }
+.rarity-epic      { color: var(--epic);      border-color: var(--epic) !important; }
+.rarity-legendary { color: var(--legendary); border-color: var(--legendary) !important; }
+.rarity-mythic    { color: var(--mythic);    border-color: var(--mythic) !important; }
+
+.halo-legendary {
+  box-shadow: 0 0 18px var(--gold-glow), 0 0 40px var(--gold-glow);
+  animation: legendaryPulse 3s ease-in-out infinite alternate;
+}
+.halo-mythic {
+  box-shadow: 0 0 22px rgba(251,113,133,0.5), 0 0 50px rgba(251,113,133,0.2);
+  animation: mythicPulse 2.5s ease-in-out infinite alternate;
+}
+.halo-epic { box-shadow: 0 0 14px rgba(139,108,240,0.4); }
+
+@keyframes legendaryPulse {
+  0%   { box-shadow: 0 0 14px var(--gold-glow); }
+  100% { box-shadow: 0 0 28px var(--gold-glow-lg), 0 0 60px var(--gold-glow); }
+}
+@keyframes mythicPulse {
+  0%   { box-shadow: 0 0 18px rgba(251,113,133,0.45); }
+  100% { box-shadow: 0 0 36px rgba(251,113,133,0.75), 0 0 70px rgba(251,113,133,0.2); }
+}
+
+/* ── Attribute Pills ──────────────────────────── */
+.attr-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border-radius: var(--r-xs);
+  text-transform: uppercase;
+}
+.attr-pill-str { background: var(--str-bg); color: var(--str); border: 1px solid var(--str); }
+.attr-pill-int { background: var(--int-bg); color: var(--int); border: 1px solid var(--int); }
+.attr-pill-agi { background: var(--agi-bg); color: var(--agi); border: 1px solid var(--agi); }
+.attr-pill-vit { background: var(--vit-bg); color: var(--vit); border: 1px solid var(--vit); }
+
+/* ── XP / Progress Bars ───────────────────────── */
+.xp-track {
+  height: 6px;
+  background: rgba(58,58,92,0.5);
+  border-radius: var(--r-full);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+.xp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--creature));
+  border-radius: var(--r-full);
+  box-shadow: 0 0 8px var(--accent-glow-md);
+  transition: width 0.8s var(--ease-out-expo);
+}
+
+/* ── Tab Transitions ──────────────────────────── */
+@keyframes tabRise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tab-content-enter {
+  animation: tabRise 280ms var(--ease-out-expo) forwards;
+}
+
+/* ── Scrollbar ────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── Utility Glows ────────────────────────────── */
+.glow-accent   { text-shadow: 0 0 12px var(--accent-glow-md); }
+.glow-gold     { text-shadow: 0 0 12px var(--gold-glow); }
+.glow-creature { text-shadow: 0 0 10px var(--creature-mid); }
+
+/* ── Close Button (universal) ─────────────────── */
+.close-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  width: 28px; height: 28px;
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--t-fast) ease;
+  flex-shrink: 0;
+}
+.close-btn:hover { border-color: var(--danger); color: var(--danger); }
