@@ -1,0 +1,13 @@
+{
+  "name": "liferpg",
+  "private": true,
+  "version": "0.0.0",
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "npm --workspace frontend run dev",
+    "build": "npm --workspace frontend run build",
+    "preview": "npm --workspace frontend run preview"
+  }
+}
