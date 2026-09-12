@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useGame } from '../../state/GameContext.jsx';
-import { soundEngine } from '../../audio/soundEngine.js';
+import { soundEngine } from '../audio/soundEngine.js';
 
 export const HeroCharacter = ({ mouseX = 0, mouseY = 0 }) => {
   const { theme, player } = useGame();

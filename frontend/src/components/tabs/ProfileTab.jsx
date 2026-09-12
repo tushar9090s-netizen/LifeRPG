@@ -1,10 +1,12 @@
 import React from 'react';
 import { useGame } from '../../state/GameContext.jsx';
+import { useAuth } from '../../contexts/AuthContext.jsx';
 import { CharacterViewer3D } from '../3d/CharacterViewer3D.jsx';
 import { RadarChart } from '../3d/RadarChart.jsx';
 import { CLASSES, TITLES_LIST, INITIAL_EQUIPMENT_CATALOG } from '../../types/gameData.js';
 
 export const ProfileTab = () => {
+  const { signOut } = useAuth();
   const {
     player,
     theme,
@@ -376,6 +378,9 @@ export const ProfileTab = () => {
           </button>
           <button onClick={resetDemoState} className="btn-pill" style={{ color: 'var(--danger)' }}>
             Reset Progression
+          </button>
+          <button onClick={signOut} className="btn-pill" style={{ color: 'var(--danger)', borderColor: 'var(--danger)' }}>
+            Sign Out
           </button>
         </div>
       </div>

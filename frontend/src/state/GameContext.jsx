@@ -9,7 +9,7 @@ import {
   TITLES_LIST,
   RECENT_BATTLES
 } from '../types/gameData.js';
-import { soundEngine } from '../audio/soundEngine.js';
+import { soundEngine } from '../components/audio/soundEngine.js';
 
 const GameContext = createContext(null);
 

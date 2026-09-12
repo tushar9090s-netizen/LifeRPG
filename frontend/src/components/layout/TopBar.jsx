@@ -1,10 +1,42 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useGame } from '../../state/GameContext.jsx';
-import { soundEngine } from '../../audio/soundEngine.js';
+import { soundEngine } from '../audio/soundEngine.js';
+import { useAuth } from '../../contexts/AuthContext.jsx';
 
 export const TopBar = () => {
   const { theme, toggleTheme, isMuted, toggleSound, player } = useGame();
+  const { currentUser, signOut, resetPassword } = useAuth();
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [profileMessage, setProfileMessage] = useState('');
+  const profileMenuRef = useRef(null);
   const isDivine = theme === 'divine';
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target)) {
+        setProfileOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
+  const handlePasswordReset = async () => {
+    if (!currentUser?.email) return;
+
+    try {
+      await resetPassword(currentUser.email);
+      setProfileMessage('Reset link sent to your email.');
+    } catch {
+      setProfileMessage('Unable to send reset link.');
+    }
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    setProfileOpen(false);
+  };
 
   return (
     <header
@@ -212,33 +244,83 @@ export const TopBar = () => {
         </div>
 
         {/* Profile Avatar Circle (Matching Concept Art Image 2) */}
-        <button
-          onClick={() => switchTab('profile')}
-          title="Open Sanctum Profile"
-          style={{
-            width: '34px',
-            height: '34px',
-            borderRadius: '50%',
-            overflow: 'hidden',
-            border: `1.5px solid ${isDivine ? 'var(--gold)' : 'var(--accent)'}`,
-            padding: 0,
-            background: 'var(--surface)',
-            cursor: 'pointer',
-            boxShadow: isDivine ? '0 0 10px var(--gold-glow)' : '0 0 10px var(--accent-glow)',
-            flexShrink: 0
-          }}
-        >
-          <img
-            src={isDivine ? '/assets/divine_hero.jpg' : '/assets/shadow_hero.jpg'}
-            alt="Profile Avatar"
+        <div ref={profileMenuRef} style={{ position: 'relative', flexShrink: 0 }}>
+          <button
+            onClick={() => setProfileOpen(prev => !prev)}
+            title="Open profile menu"
+            aria-label="Open profile menu"
+            aria-expanded={profileOpen}
             style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'top center'
+              width: '34px',
+              height: '34px',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              border: `1.5px solid ${isDivine ? 'var(--gold)' : 'var(--accent)'}`,
+              padding: 0,
+              background: 'var(--surface)',
+              cursor: 'pointer',
+              boxShadow: isDivine ? '0 0 10px var(--gold-glow)' : '0 0 10px var(--accent-glow)',
+              flexShrink: 0
             }}
-          />
-        </button>
+          >
+            <img
+              src={isDivine ? '/assets/divine_hero.jpg' : '/assets/shadow_hero.jpg'}
+              alt="Profile Avatar"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'top center'
+              }}
+            />
+          </button>
+
+          {profileOpen && (
+            <div
+              role="menu"
+              style={{
+                position: 'absolute',
+                top: '44px',
+                right: 0,
+                width: '220px',
+                padding: '10px',
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                borderRadius: '10px',
+                boxShadow: '0 16px 34px rgba(0, 0, 0, 0.45)',
+                zIndex: 200
+              }}
+            >
+              <div style={{ padding: '8px 10px 10px', borderBottom: '1px solid var(--border-subtle)' }}>
+                <div style={{ color: 'var(--text)', fontSize: '0.82rem', fontWeight: '700' }}>{player.displayName}</div>
+                <div style={{ color: 'var(--dim-text)', fontSize: '0.68rem', marginTop: '3px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {currentUser?.email || 'Awakened hunter'}
+                </div>
+              </div>
+              {profileMessage && (
+                <div role="status" style={{ padding: '8px 10px', color: 'var(--accent)', fontSize: '0.68rem' }}>
+                  {profileMessage}
+                </div>
+              )}
+              <button
+                type="button"
+                role="menuitem"
+                onClick={handlePasswordReset}
+                style={{ width: '100%', padding: '10px', marginTop: '4px', textAlign: 'left', color: 'var(--text)', borderRadius: '7px', cursor: 'pointer' }}
+              >
+                Reset password
+              </button>
+              <button
+                type="button"
+                role="menuitem"
+                onClick={handleSignOut}
+                style={{ width: '100%', padding: '10px', textAlign: 'left', color: 'var(--danger)', borderRadius: '7px', cursor: 'pointer' }}
+              >
+                Sign out
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

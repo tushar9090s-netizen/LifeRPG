@@ -1,5 +1,7 @@
 import React from 'react';
 import { GameProvider, useGame } from './state/GameContext.jsx';
+import { useAuth } from './contexts/AuthContext.jsx';
+import Login from './components/tabs/Login.jsx';
 import { TopBar } from './components/layout/TopBar.jsx';
 import { BottomNav } from './components/layout/BottomNav.jsx';
 import { HomeTab } from './components/tabs/HomeTab.jsx';
@@ -72,6 +74,16 @@ const MainArena = () => {
 };
 
 export default function App() {
+  const { currentUser, loading } = useAuth();
+
+  if (loading) {
+    return <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg)' }} />;
+  }
+
+  if (!currentUser) {
+    return <Login />;
+  }
+
   return (
     <GameProvider>
       <MainArena />
