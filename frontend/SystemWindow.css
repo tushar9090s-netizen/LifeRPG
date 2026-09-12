@@ -9,6 +9,37 @@
     background: radial-gradient(circle at center, #11111c 0%, #08080c 100%);
     font-family: 'Courier New', Courier, monospace;
     color: #b0c4de;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shadowy hand silhouette sits behind the window and curls around its edges. */
+.devil-hand {
+    position: absolute;
+    width: min(104vw, 1320px);
+    height: min(96vh, 980px);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -46%);
+    z-index: 0;
+    opacity: 0.9;
+    filter: blur(0.2px) drop-shadow(0 0 18px rgba(111, 37, 108, 0.42));
+    pointer-events: none;
+}
+
+.devil-hand .hand-shadow {
+    fill: url(#hand-gradient);
+    stroke: rgba(137, 69, 133, 0.7);
+    stroke-width: 5;
+    vector-effect: non-scaling-stroke;
+}
+
+.devil-hand .hand-highlight {
+    fill: none;
+    stroke: rgba(220, 111, 181, 0.34);
+    stroke-width: 4;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
 }
 
 /* Container that holds the SVG background and the Grid */
@@ -20,6 +51,7 @@
     padding: 12% 11%; 
     box-sizing: border-box;
     display: flex;
+    z-index: 1;
 }
 
 /* The Custom SVG Border */
